@@ -1,0 +1,13 @@
+openvpn_monitor:
+  datetimeformat: "%%d/%%m/%%Y"
+  latitude: -37
+  longitude: 144
+  maps: true
+  mapsheight: 500
+  site: test
+  sites:
+    - alias: UDP
+      host: openvpn-udp
+      name: UDP
+      port: 5555
+      showdisconnect: true
