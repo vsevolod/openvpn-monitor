@@ -1,8 +1,12 @@
 require 'rubygems'
-require 'bundler'
+require 'bundler/setup'
 require 'yaml'
 
-Bundler.require(ENV.fetch('RUBY_ENV', :default).to_sym)
+groups = ['default'] | [ENV.fetch('RUBY_ENV', 'default')]
+Bundler.require(*groups)
 
+require_relative './open_vpn/management/commands/status'
+require_relative './open_vpn/management/commands'
+require_relative './open_vpn/management/client'
 require_relative './open_vpn/monitor/application'
 require_relative './open_vpn/monitor/configuration'
