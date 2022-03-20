@@ -8,6 +8,7 @@ RSpec.describe OpenVPN::Management::Client do
 
   describe 'pid' do
     subject(:method) { instance.pid }
+
     let(:result) do
       <<~TEXT
         >INFO:OpenVPN Management Interface Version 1 -- type 'help' for more info
