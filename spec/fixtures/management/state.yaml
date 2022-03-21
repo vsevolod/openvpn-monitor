@@ -1,0 +1,8 @@
+---
+:args:
+  String: state
+  Match: !ruby/regexp /(SUCCESS:.*\n|ERROR:.*\n|END.*\n)/
+:content: |
+  >INFO:OpenVPN Management Interface Version 1 -- type 'help' for more info
+  1647876161,CONNECTED,SUCCESS,192.168.255.1,,,,
+  END

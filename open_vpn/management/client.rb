@@ -10,8 +10,9 @@ module OpenVPN
 
       TIMEOUT = 10
       COMMAND_MATCHER = /(SUCCESS:.*\n|ERROR:.*\n|END.*\n)/
-      ERROR = /\AERROR\: (.+)\n\Z/
-      SUCCESS = /\ASUCCESS\: (.+)\n\Z/
+      ERROR = /^ERROR\: (.+)$/
+      SUCCESS = /^SUCCESS\: (.+)$/
+      PROMPT_MATCHER = />INFO:OpenVPN.*$/
 
       attr_reader :sock
 
@@ -20,7 +21,7 @@ module OpenVPN
           'Host' => host,
           'Port' => port,
           'Timeout' => TIMEOUT,
-          'Prompt' => />INFO:OpenVPN.*\n/
+          'Prompt' => PROMPT_MATCHER
         }
 
         @sock = Net::Telnet::new(telnet_options)
