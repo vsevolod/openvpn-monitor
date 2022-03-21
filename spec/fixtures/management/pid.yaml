@@ -1,7 +1,7 @@
 ---
-:args:
-  String: pid
-  Match: !ruby/regexp /(SUCCESS:.*\n|ERROR:.*\n|END.*\n)/
-:content: |
-  >INFO:OpenVPN Management Interface Version 1 -- type 'help' for more info
-  SUCCESS: pid=1
+- :args:
+    String: pid
+    Match: !ruby/regexp /(SUCCESS:.*\n|ERROR:.*\n|END.*\n)/
+  :content: |
+    >INFO:OpenVPN Management Interface Version 1 -- type 'help' for more info
+    SUCCESS: pid=1

@@ -1,7 +1,7 @@
 ---
-:args:
-  String: load-stats
-  Match: !ruby/regexp /(SUCCESS:.*\n|ERROR:.*\n|END.*\n)/
-:content: |
-  >INFO:OpenVPN Management Interface Version 1 -- type 'help' for more info
-  SUCCESS: nclients=1,bytesin=990209,bytesout=41046303
+- :args:
+    String: load-stats
+    Match: !ruby/regexp /(SUCCESS:.*\n|ERROR:.*\n|END.*\n)/
+  :content: |
+    >INFO:OpenVPN Management Interface Version 1 -- type 'help' for more info
+    SUCCESS: nclients=1,bytesin=5088181,bytesout=307029090

@@ -6,7 +6,7 @@ RSpec.describe OpenVPN::Management::Client do
   let(:host) { '185.252.215.176' }
   let(:port) { 5550 }
 
-  describe 'pid' do
+  describe '.pid' do
     subject(:method) { instance.pid }
 
     let(:result) { 'pid=1' }
@@ -16,12 +16,12 @@ RSpec.describe OpenVPN::Management::Client do
     end
   end
 
-  describe 'state' do
+  describe '.state' do
     subject(:method) { instance.state }
 
     let(:result) do
       {
-        up_since: Time.at(1647876161).utc,
+        up_since: Time.at(1647894385).utc,
         connected: 'CONNECTED',
         success: 'SUCCESS',
         local_ip: '192.168.255.1',
@@ -35,14 +35,14 @@ RSpec.describe OpenVPN::Management::Client do
     end
   end
 
-  describe 'load_stats' do
+  describe '.load_stats' do
     subject(:method) { instance.load_stats }
 
     let(:result) do
       {
         nclients: '1',
-        bytesin: '990209',
-        bytesout:'41046303'
+        bytesin: '5088181',
+        bytesout:'307029090'
       }
     end
 
@@ -51,7 +51,7 @@ RSpec.describe OpenVPN::Management::Client do
     end
   end
 
-  describe 'status' do
+  describe '.status' do
     subject(:method) { instance.status }
 
     let(:result) do
@@ -66,14 +66,14 @@ RSpec.describe OpenVPN::Management::Client do
         name: "seva",
         peer_id: "0",
         real_address: "5.16.114.65:4581",
-        received_bytes: "1034980",
-        sent_bytes: "41207419",
+        received_bytes: "5088222",
+        sent_bytes: "307029172",
         username: "UNDEF",
         virtual_address: "192.168.255.6"
       )
 
       expect(method.dig(:tables, 0)).to eq(
-        last_ref: "Mon Mar 21 21:45:19 2022",
+        last_ref: "Mon Mar 21 22:49:10 2022",
         name: "seva",
         real_address: "5.16.114.65:4581",
         virtual_address: "192.168.255.6"
