@@ -8,7 +8,10 @@ module OpenVPN
       end
 
       def call(env)
-        data = OpenVPN::Monitor::PrepareData.new(self).call(site(env))
+        current_site = site(env)
+        return error_404 if current_site.nil?
+
+        data = OpenVPN::Monitor::PrepareData.new(self).call(current_site)
         html = OpenVPN::Monitor::GenerateHTML.new(self).call(data)
 
         [200, headers, [html]]
@@ -18,14 +21,17 @@ module OpenVPN
 
       def site(env)
         name = env.fetch('PATH_INFO', '').sub(/^\//, '')
-        name = config.sites.first['alias'] if name == ''
-        name
+        return config.sites.first['alias'] if name == ''
+
+        config.sites.find { _1['alias'] == name }
       end
 
       def headers
-        {
-          'Content-Type' => 'text/html'
-        }
+        { 'Content-Type' => 'text/html' }
+      end
+
+      def error_404
+        [404, headers, ['404 Page not found']]
       end
     end
   end

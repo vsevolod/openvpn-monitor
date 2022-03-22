@@ -1,6 +1,8 @@
 module OpenVPN
   module Monitor
     class GenerateHTML
+      include Helper
+
       INDEX_ERB = 'open_vpn/monitor/views/index.html.erb'
 
       attr_reader :config

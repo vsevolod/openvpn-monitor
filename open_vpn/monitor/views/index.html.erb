@@ -74,5 +74,48 @@
       </div>
       </div>
     </nav>
+    <div class="container-fluid">
+      <div class="panel panel-success" id="<%= data[:current_site] %>">
+        <div class="panel-heading">
+          <h3 class="panel-title"><%= data[:current_site] %></h3>
+        </div>
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table class="table table-condensed table-responsive">
+              <thead>
+                <tr>
+                  <th>VPN Mode</th>
+                  <th>Status</th>
+                  <th>Pingable</th>
+                  <th>Clients</th>
+                  <th>Total Bytes In</th>
+                  <th>Total Bytes Out</th>
+                  <th>Up Since</th>
+                  <th>Local IP Address</th>
+                  <% if data.dig(:state, :mode) == 'Client' %>
+                    <th>Remote IP Address</th>
+                  <% end %>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><%= data.dig(:state, :mode) %></td>
+                  <td><%= data.dig(:state, :connected) %></td>
+                  <td><%= data.dig(:state, :success) == 'SUCCESS' ? 'YES' : 'NO' %></td>
+                  <td><%= data.dig(:stats, :nclients) %></td>
+                  <td><%= number_format(data.dig(:stats, :bytesin)) %></td>
+                  <td><%= number_format(data.dig(:stats, :bytesout)) %></td>
+                  <td><%= data.dig(:state, :up_since).to_s %></td>
+                  <td><%= data.dig(:state, :local_ip) %></td>
+                  <% if data.dig(:state, :mode) == 'Client' %>
+                    <td><%= data.dig(:state, :remote_ip) %></td>
+                  <% end %>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
