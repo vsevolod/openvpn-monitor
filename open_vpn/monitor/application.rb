@@ -7,13 +7,20 @@ module OpenVPN
         @config = Configuration.new
       end
 
-      def call(_env)
-        data = OpenVPN::Monitor::PrepareData.new(self).call
+      def call(env)
+        data = OpenVPN::Monitor::PrepareData.new(self).call(site(env))
+        html = OpenVPN::Monitor::GenerateHTML.new(self).call(data)
 
-        [200, headers, ['OK']]
+        [200, headers, [html]]
       end
 
       private
+
+      def site(env)
+        name = env.fetch('PATH_INFO', '').sub(/^\//, '')
+        name = config.sites.first['alias'] if name == ''
+        name
+      end
 
       def headers
         {

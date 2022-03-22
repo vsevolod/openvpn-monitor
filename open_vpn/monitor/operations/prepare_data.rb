@@ -7,12 +7,14 @@ module OpenVPN
         @config = application.config
       end
 
-      def call
-        config.sites.inject({}) do |acc, site_config|
-          acc[site_config['alias']] = prepare_site(site_config)
+      def call(current_site)
+        site_config = config.sites.find{ _1['alias'] == current_site }
 
-          acc
-        end
+        {
+          sites: config.sites.map { _1['alias'] },
+          current_site: current_site,
+          **prepare_site(site_config)
+        }
       end
 
       private
