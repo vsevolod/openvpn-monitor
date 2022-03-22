@@ -7,7 +7,7 @@ openvpn_monitor:
   site: test
   sites:
     - alias: UDP
-      host: openvpn-udp
+      host: '185.252.215.176'
       name: UDP
-      port: 5555
+      port: 5550
       showdisconnect: true

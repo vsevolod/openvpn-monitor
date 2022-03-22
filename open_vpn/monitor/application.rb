@@ -8,6 +8,8 @@ module OpenVPN
       end
 
       def call(_env)
+        data = OpenVPN::Monitor::PrepareData.new(self).call
+
         [200, headers, ['OK']]
       end
 
